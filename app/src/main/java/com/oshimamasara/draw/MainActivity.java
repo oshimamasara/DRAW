@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle(R.string.app_name);
         //paintView = (PaintView) findViewById(R.id.canvas);
         ButterKnife.bind(this);
         abcClassifier = new AI(this);
@@ -79,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
             String[] answere = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
             String predict = answere[digit] ;
+            Log.d(TAG, "predict No,:" + predict);
 
             mResultText.setText(getString(R.string.found_digits, predict));
             mPredictText.setText(getString(R.string.preview_scaled));

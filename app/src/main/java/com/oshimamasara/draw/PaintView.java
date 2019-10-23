@@ -25,7 +25,13 @@ public class PaintView extends View {
     private float mX, mY;
     private static final float TOLERANSE=5;
     Context context;
+    private Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 
+
+
+    public PaintView(Context context) {
+        this(context, null);
+    }
 
     public PaintView(Context context, AttributeSet attra) {
         super(context, attra);
@@ -37,7 +43,7 @@ public class PaintView extends View {
         mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
-        mPaint.setStrokeWidth(12f);
+        mPaint.setStrokeWidth(50f);
     }
 
     public Bitmap getBitmap() {
@@ -50,6 +56,7 @@ public class PaintView extends View {
         //super.onSizeChanged(w,h,oldw,oldh);
         //Log.d(TAG, "onSizeChanged  w & h::" + mBitmap);
         //Log.d(TAG, "oldw & oldh::" + mBitmap);
+
         int height = metrics.widthPixels;
         int width = metrics.widthPixels;
         Log.d(TAG, "onSizeChanged:height:" + height);
@@ -64,12 +71,17 @@ public class PaintView extends View {
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        canvas.drawPath(mPath, mPaint);
+        mCanvas.drawColor(Color.WHITE);
+
+        mCanvas.drawPath(mPath, mPaint);
         Log.d(TAG, "onDraw=" + mPath);
         Log.d(TAG, "onDraw=" + mPaint);
+
+        canvas.drawBitmap(mBitmap,0,0, mBitmapPaint);
     }
 
     private void startTouch(float x,float y){
+
         mPath.moveTo(x, y);
         mX = x;
         mY = y;
@@ -90,6 +102,7 @@ public class PaintView extends View {
     }
 
     public void clearCanvas(){
+        mCanvas.drawColor(Color.WHITE);
         mPath.reset();
         invalidate();
     }

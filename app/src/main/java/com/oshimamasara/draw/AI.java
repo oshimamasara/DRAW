@@ -39,8 +39,6 @@ public class AI {
 
             inputBuffer.order(ByteOrder.nativeOrder());
             abcOutput = new float[DIM_BATCH_SIZE][NUMBER_LENGTH];
-            Log.d(TAG, "Created a Tensorflow Lite Classifier.");
-            Log.d(TAG, String.valueOf(abcOutput));
         } catch (IOException e) {
             Log.e(TAG, "IOException loading the tflite file");
         }
@@ -99,16 +97,21 @@ public class AI {
         if (bitmap == null || inputBuffer == null) {
             return;
         }
-
+        Log.d(TAG, "preprocess bimap★ :  " + bitmap);
+        Log.d(TAG, "preprocess inputBuffer★ :  " + inputBuffer);
         inputBuffer.rewind();
 
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
+        Log.d(TAG, "preprocess w★ :  " + width);
+        Log.d(TAG, "preprocess h★ :  " + height);
 
         long startTime = SystemClock.uptimeMillis();
 
         int[] pixels = new int[width * height];
         bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+        Log.d(TAG, "preprocess pixel w★ :  " + width);
+        Log.d(TAG, "preprocess pixel h★ :  " + height);
 
         for (int i = 0; i < pixels.length; ++i) {
             int pixel = pixels[i];
