@@ -7,7 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.DisplayCutout;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -38,12 +40,22 @@ public class PaintView extends View {
         mPaint.setStrokeWidth(12f);
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh){
-        super.onSizeChanged(w,h,oldw,oldh);
-        Log.d(TAG, "onSizeChanged  w & h::" + mBitmap);
-        Log.d(TAG, "oldw & oldh::" + mBitmap);
-        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+    public Bitmap getBitmap() {
+        return mBitmap;
+    }
+
+    //@Override
+    //protected void onSizeChanged(int w, int h, int oldw, int oldh){
+    protected void onSizeChanged(DisplayMetrics metrics){
+        //super.onSizeChanged(w,h,oldw,oldh);
+        //Log.d(TAG, "onSizeChanged  w & h::" + mBitmap);
+        //Log.d(TAG, "oldw & oldh::" + mBitmap);
+        int height = metrics.widthPixels;
+        int width = metrics.widthPixels;
+        Log.d(TAG, "onSizeChanged:height:" + height);
+        Log.d(TAG, "onSizeChanged:width:" + width);
+
+        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Log.d(TAG, "Bitmap=" + mBitmap);
         mCanvas = new Canvas(mBitmap);
         Log.d(TAG, "Canvas=" + mCanvas);
