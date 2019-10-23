@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="OK.jpg" heigit="500"/>
+</div>
+
 モデルの追加が必要
 
 ## model
